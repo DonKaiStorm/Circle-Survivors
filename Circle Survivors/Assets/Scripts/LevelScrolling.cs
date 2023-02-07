@@ -1,20 +1,18 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelScrolling : MonoBehaviour
 {
-
+	//Player Based Information
     [SerializeField] Transform playerTransform;
     Vector2Int currentTilePosition = new Vector2Int(0,0);
 	[SerializeField] Vector2Int playerTilePosition;
 	Vector2Int onTileGridPlayerPosition;
 
-
+	//TerrainTileInformation
 	[SerializeField] float tileSize = 2f;
     GameObject[,] terrainTiles;
 
+	//Count of Existing Tiles
 	[SerializeField] int terrainTileHorizontalCount;
 	[SerializeField] int terrainTileVerticalCount;
 
@@ -32,6 +30,7 @@ public class LevelScrolling : MonoBehaviour
 	}
 	private void Update()
 	{
+		//Set PlayerTile position based on location divided by tileSize
 		playerTilePosition.x = (int)(playerTransform.position.x / tileSize);
 		playerTilePosition.y = (int)(playerTransform.position.y / tileSize);
 
@@ -51,9 +50,10 @@ public class LevelScrolling : MonoBehaviour
 	{
 		if (horizontal)
 		{
+			//Wrap using horizontal values
 			if (currentValue >= 0)
 			{
-				currentValue = currentValue % terrainTileHorizontalCount;
+				currentValue %= terrainTileHorizontalCount;
 			}
 			else
 			{
@@ -63,9 +63,10 @@ public class LevelScrolling : MonoBehaviour
 		}
 		else
 		{
+			//Wrap using vertical values
 			if (currentValue >= 0)
 			{
-				currentValue = currentValue % terrainTileVerticalCount;
+				currentValue %= terrainTileVerticalCount;
 			}
 			else
 			{

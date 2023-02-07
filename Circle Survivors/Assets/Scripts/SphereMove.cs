@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -17,8 +15,6 @@ public class SphereMove : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 	}
 
-
-    // Update is called once per frame
     void Update()
     {
         //Gather the X & Y Input, and multiply by the speed value (normalize it after gaining inputs so the diagonals don't go faster than WS and AD axes)
