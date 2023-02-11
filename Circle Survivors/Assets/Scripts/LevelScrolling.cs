@@ -3,14 +3,14 @@ using UnityEngine;
 public class LevelScrolling : MonoBehaviour
 {
 	//Player Based Information
-    [SerializeField] Transform playerTransform;
-    Vector2Int currentTilePosition = new Vector2Int(0,0);
+	[SerializeField] Transform playerTransform;
+	Vector2Int currentTilePosition = new Vector2Int(0, 0);
 	[SerializeField] Vector2Int playerTilePosition;
 	Vector2Int onTileGridPlayerPosition;
 
 	//TerrainTileInformation
 	[SerializeField] float tileSize = 2f;
-    GameObject[,] terrainTiles;
+	GameObject[,] terrainTiles;
 
 	//Count of Existing Tiles
 	[SerializeField] int terrainTileHorizontalCount;
