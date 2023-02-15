@@ -2,15 +2,16 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public int maxHP = 40;
+    public int currentHP = 40;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public void TakeDamage(int damage)
+	{
+        currentHP -= damage;
+
+        if (currentHP <= 0)
+		{
+            Debug.Log("Welp, you should be dead...");
+		}
+	}
 }

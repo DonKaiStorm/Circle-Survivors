@@ -5,6 +5,7 @@ public class Bullet : MonoBehaviour
 	public Rigidbody2D rb;
 	public float moveSpeed;
 	public Vector2 moveDirection;
+	public int ATK;
 
 	public void Update()
 	{
@@ -24,7 +25,13 @@ public class Bullet : MonoBehaviour
 		}
 		else
 		{
+			ApplyDamage(collision);
 			Destroy(this.gameObject);
 		}
+	}
+
+	public void ApplyDamage(Collision2D collision)
+	{
+		collision.gameObject.GetComponent<Enemy>().getDamage(ATK);
 	}
 }

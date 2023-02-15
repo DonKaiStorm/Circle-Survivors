@@ -4,7 +4,9 @@ public class Enemy : MonoBehaviour
 {
 	[SerializeField] Transform playerLocation;
 	GameObject player;
-	[SerializeField] float speed;
+	Character targetCharacter;
+	public EnemyStats stats;
+	int currentHP;
 
 	Rigidbody2D rb;
 
@@ -12,12 +14,14 @@ public class Enemy : MonoBehaviour
 	{
 		rb = GetComponent<Rigidbody2D>();
 		player = playerLocation.gameObject;
+		currentHP = stats.maxHP;
+		targetCharacter = player.GetComponent<Character>();
 	}
 
 	public void FixedUpdate()
 	{
 		Vector3 direction = (playerLocation.position - transform.position).normalized;
-		rb.velocity = direction * speed;
+		rb.velocity = direction * stats.speed;
 	}
 
 
@@ -26,12 +30,22 @@ public class Enemy : MonoBehaviour
 		//If colliding with the player, attack it.
 		if (collision.gameObject == player)
 		{
-			Attack();
+			attack();
 		}
 	}
 
-	private void Attack()
+	private void attack()
 	{
-		Debug.Log("Striking the Sphere, in case it's not clear.");
+		targetCharacter.TakeDamage(stats.atk);
+	}
+
+	public void getDamage(int damage)
+	{
+		currentHP -= damage;
+
+		if (currentHP <= 0)
+		{
+			Destroy(this.gameObject);
+		}
 	}
 }
