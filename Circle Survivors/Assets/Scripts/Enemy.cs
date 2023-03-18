@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-	[SerializeField] Transform playerLocation;
+	Transform playerLocation;
 	GameObject player;
 	Character targetCharacter;
 	public EnemyStats stats;
@@ -13,8 +13,14 @@ public class Enemy : MonoBehaviour
 	private void Awake()
 	{
 		rb = GetComponent<Rigidbody2D>();
-		player = playerLocation.gameObject;
 		currentHP = stats.maxHP;
+	}
+
+	//Sets the target for the enemy to follow when spawning in
+	public void SetTarget(GameObject target)
+	{
+		player = target;
+		playerLocation = target.transform;
 		targetCharacter = player.GetComponent<Character>();
 	}
 
@@ -45,6 +51,7 @@ public class Enemy : MonoBehaviour
 
 		if (currentHP <= 0)
 		{
+			targetCharacter.GetComponent<PlayerLevel>().addExperience(stats.XP);
 			Destroy(this.gameObject);
 		}
 	}

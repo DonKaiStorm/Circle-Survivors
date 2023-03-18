@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour
 	public Vector2 moveDirection;
 	public int ATK;
 
-	public void Update()
+	public void FixedUpdate()
 	{
 		rb.velocity = moveDirection * moveSpeed;
 		

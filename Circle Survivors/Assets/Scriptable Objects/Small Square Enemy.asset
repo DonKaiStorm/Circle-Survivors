@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Small Square Enemy
   m_EditorClassIdentifier: 
   maxHP: 5
-  speed: 4.6
+  speed: 4.5
   atk: 1
+  XP: 45

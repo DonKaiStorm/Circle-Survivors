@@ -5,13 +5,24 @@ public class BulletSpawn : MonoBehaviour
 
 	public Transform firePoint;
 	public GameObject bullet;
+	public float fireRate;
+	public Camera mainCamera;
 
+	public void Start()
+	{
+		mainCamera = Camera.main;
+	}
 	// Update is called once per frame
 	void Update()
 	{
 		if (Input.GetButtonDown("Fire1"))
 		{
-			Shoot();
+			InvokeRepeating("Shoot", 0f, fireRate);
+		}
+
+		if (Input.GetButtonUp("Fire1"))
+		{
+			CancelInvoke("Shoot");
 		}
 	}
 
@@ -25,7 +36,7 @@ public class BulletSpawn : MonoBehaviour
 		Vector3 shootDirection;
 		shootDirection = Input.mousePosition;
 		shootDirection.z = 0.0f;
-		shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
+		shootDirection = mainCamera.ScreenToWorldPoint(shootDirection);
 		shootDirection -= transform.position;
 
 		//Set direction

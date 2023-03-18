@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Square Enemy
   m_EditorClassIdentifier: 
   maxHP: 10
-  speed: 2.3
+  speed: 2.5
   atk: 2
+  XP: 30

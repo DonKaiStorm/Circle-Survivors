@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Linq;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class SphereMove : MonoBehaviour
@@ -11,6 +12,8 @@ public class SphereMove : MonoBehaviour
 	[SerializeField]
 	float speed = 4;
 	[SerializeField] private Camera cam;
+
+	public PassiveItems playerItemList;
 
 	private void Awake()
 	{
@@ -35,5 +38,10 @@ public class SphereMove : MonoBehaviour
 		Vector2 lookDirection = mousePos - rb.position;
 		float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg - 90;
 		rb.rotation = angle;
+
+		if (Input.GetKeyDown(KeyCode.P))
+		{
+			playerItemList.unEquip(playerItemList.itemList.First());
+		}
 	}
 }
