@@ -6,6 +6,7 @@ public class LevelScrolling : MonoBehaviour
 	[SerializeField] Transform playerTransform;
 	Vector2Int currentTilePosition = new Vector2Int(0, 0);
 	[SerializeField] Vector2Int playerTilePosition;
+	Vector2Int prevTilePosition;
 	Vector2Int onTileGridPlayerPosition;
 
 	//TerrainTileInformation
@@ -16,8 +17,8 @@ public class LevelScrolling : MonoBehaviour
 	[SerializeField] int terrainTileHorizontalCount;
 	[SerializeField] int terrainTileVerticalCount;
 
-	[SerializeField] int fovHeight = 3;
-	[SerializeField] int fovWidth = 3;
+	[SerializeField] int fovHeight;
+	[SerializeField] int fovWidth;
 
 	public void Add(GameObject gameObject, Vector2Int tilePosition)
 	{
@@ -31,18 +32,21 @@ public class LevelScrolling : MonoBehaviour
 	private void Update()
 	{
 		//Set PlayerTile position based on location divided by tileSize
-		playerTilePosition.x = (int)(playerTransform.position.x / tileSize);
-		playerTilePosition.y = (int)(playerTransform.position.y / tileSize);
-
-		playerTilePosition.x -= playerTransform.position.x < 0 ? 1 : 0;
-		playerTilePosition.y -= playerTransform.position.y < 0 ? 1 : 0;
-		if (currentTilePosition != playerTilePosition)
+		playerTilePosition.x = (int)(playerTransform.localPosition.x / tileSize);
+		playerTilePosition.y = (int)(playerTransform.localPosition.y / tileSize);
+		if(playerTilePosition != prevTilePosition)
 		{
-			currentTilePosition = playerTilePosition;
+			prevTilePosition = playerTilePosition;
+			playerTilePosition.x -= playerTransform.localPosition.x < 0 ? 1 : 0;
+			playerTilePosition.y -= playerTransform.localPosition.y < 0 ? 1 : 0;
+			if (currentTilePosition != playerTilePosition)
+			{
+				currentTilePosition = playerTilePosition;
 
-			onTileGridPlayerPosition.x = CalculateWrapPosition(onTileGridPlayerPosition.x, true);
-			onTileGridPlayerPosition.y = CalculateWrapPosition(onTileGridPlayerPosition.y, false);
-			UpdateScreen();
+				onTileGridPlayerPosition.x = CalculateWrapPosition(onTileGridPlayerPosition.x, true);
+				onTileGridPlayerPosition.y = CalculateWrapPosition(onTileGridPlayerPosition.y, false);
+				UpdateScreen();
+			}
 		}
 	}
 

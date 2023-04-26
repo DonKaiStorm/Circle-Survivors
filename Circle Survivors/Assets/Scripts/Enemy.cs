@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour
 	Character targetCharacter;
 	public EnemyStats stats;
 	int currentHP;
+	public bool spawnEnemyOnDeath;
+	public GameObject enemyToSpawn;
 
 	Rigidbody2D rb;
 
@@ -24,7 +26,7 @@ public class Enemy : MonoBehaviour
 		targetCharacter = player.GetComponent<Character>();
 	}
 
-	public void FixedUpdate()
+	public void Update()
 	{
 		Vector3 direction = (playerLocation.position - transform.position).normalized;
 		rb.velocity = direction * stats.speed;
@@ -51,6 +53,13 @@ public class Enemy : MonoBehaviour
 
 		if (currentHP <= 0)
 		{
+			if (spawnEnemyOnDeath == true)
+			{
+				GameObject enemySpawned = Instantiate<GameObject>(enemyToSpawn);
+				enemySpawned.transform.position = transform.position;
+				enemySpawned.GetComponent<Enemy>().SetTarget(player);
+			}
+			player.GetComponent<AudioSource>().PlayOneShot(GetComponent<AudioSource>().clip);
 			targetCharacter.GetComponent<PlayerLevel>().addExperience(stats.XP);
 			Destroy(this.gameObject);
 		}

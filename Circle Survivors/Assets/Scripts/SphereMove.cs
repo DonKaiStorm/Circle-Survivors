@@ -13,8 +13,6 @@ public class SphereMove : MonoBehaviour
 	float speed = 4;
 	[SerializeField] private Camera cam;
 
-	public PassiveItems playerItemList;
-
 	private void Awake()
 	{
 		rb = GetComponent<Rigidbody2D>();
@@ -39,9 +37,5 @@ public class SphereMove : MonoBehaviour
 		float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg - 90;
 		rb.rotation = angle;
 
-		if (Input.GetKeyDown(KeyCode.P))
-		{
-			playerItemList.unEquip(playerItemList.itemList.First());
-		}
 	}
 }

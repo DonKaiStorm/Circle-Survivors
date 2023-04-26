@@ -1,11 +1,9 @@
 using UnityEngine;
 
-public class BulletSpawn : MonoBehaviour
+public class BulletSpawn : WeaponBase
 {
-
 	public Transform firePoint;
 	public GameObject bullet;
-	public float fireRate;
 	public Camera mainCamera;
 
 	public void Start()
@@ -13,20 +11,22 @@ public class BulletSpawn : MonoBehaviour
 		mainCamera = Camera.main;
 	}
 	// Update is called once per frame
-	void Update()
+	public void Update()
 	{
-		if (Input.GetButtonDown("Fire1"))
+		if (Input.GetButtonDown("Fire1") && Time.timeScale != 0f)
 		{
-			InvokeRepeating("Shoot", 0f, fireRate);
+			InvokeRepeating("Attack", 0f, fireRate);
 		}
 
 		if (Input.GetButtonUp("Fire1"))
 		{
-			CancelInvoke("Shoot");
+			CancelInvoke("Attack");
 		}
+
+		fireRate = weaponStats.attackTime;
 	}
 
-	void Shoot()
+	public override void Attack()
 	{
 		//Instantiate the bullet
 		GameObject bulletInstance = Instantiate(bullet, firePoint.position, firePoint.root.rotation);
@@ -39,7 +39,12 @@ public class BulletSpawn : MonoBehaviour
 		shootDirection = mainCamera.ScreenToWorldPoint(shootDirection);
 		shootDirection -= transform.position;
 
-		//Set direction
+		//Set direction & Set Damage to Spawner Damage
 		rb.GetComponent<Bullet>().moveDirection = new Vector2(shootDirection.x, shootDirection.y).normalized;
+		bulletInstance.GetComponent<Bullet>().ATK = weaponStats.ATK;
+		bulletInstance.GetComponent<Bullet>().ricochetChance = weaponStats.ricochetChance;
+
+		//Play SFX
+		GetComponent<AudioSource>().PlayOneShot(GetComponent<AudioSource>().clip, 1f);
 	}
 }

@@ -32,14 +32,14 @@ public class EnemyManager : MonoBehaviour
 
 		//Genetate the spawn position and then use the player position as a center point
 		GeneratePosition();
-		spawnPosition += player.transform.position;
+		spawnPosition += player.transform.localPosition;
 
 		//Determine which enemy to spawn an spawn it
 		int enemyToSpawn = Random.Range(0, listCount);
 		GameObject spawnedEnemy = Instantiate(enemyList[enemyToSpawn]);
 
 		//Set the transform and target, along with organization in the hierarchy
-		spawnedEnemy.transform.position = spawnPosition;
+		spawnedEnemy.transform.localPosition = spawnPosition;
 		spawnedEnemy.GetComponent<Enemy>().SetTarget(player);
 		spawnedEnemy.transform.parent = parentTransform;
 	}

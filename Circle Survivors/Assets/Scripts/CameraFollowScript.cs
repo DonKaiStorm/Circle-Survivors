@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class CameraFollowScript : MonoBehaviour
 {
-    public GameObject cam;
+    public Transform camTransform;
     public Transform playerTransform;
 
     void Update()
     {
-        cam.transform.position = new Vector3 (playerTransform.position.x, playerTransform.position.y, cam.transform.position.z);
+        camTransform.localPosition = new Vector3 (playerTransform.localPosition.x, playerTransform.localPosition.y, camTransform.localPosition.z);
 
     }
 }

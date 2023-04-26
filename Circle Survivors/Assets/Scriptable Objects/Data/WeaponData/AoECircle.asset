@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43f48c438436659499de890555d76512, type: 3}
+  m_Name: AoECircle
+  m_EditorClassIdentifier: 
+  Name: AoE Circle
+  stats:
+    ATK: 2
+    attackTime: 0
+    ricochetChance: 0
+  weaponBasePrefab: {fileID: 4974498047050658079, guid: 6bde0717081c22047ad9e6f3d51038ab, type: 3}
+  upgrades: []

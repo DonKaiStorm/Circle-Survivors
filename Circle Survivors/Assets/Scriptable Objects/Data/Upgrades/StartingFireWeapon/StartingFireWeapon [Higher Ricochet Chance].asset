@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 045602643f01e094887fa41a9f755f15, type: 3}
+  m_Name: StartingFireWeapon [Higher Ricochet Chance]
+  m_EditorClassIdentifier: 
+  upgradeType: 0
+  Name: Higher Ricochet Chance
+  icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  weaponData: {fileID: 11400000, guid: 32e736035203cde4b860eb7476ef4c5e, type: 2}
+  weaponUpgradeStats:
+    ATK: 0
+    attackTime: 0
+    ricochetChance: 30
